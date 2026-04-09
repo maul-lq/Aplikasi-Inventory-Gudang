@@ -1,0 +1,25 @@
+CONTOH .ENV PRODUCTION UNTUK LINUX VM
+====================================
+
+Gunakan ini sebagai contoh isi file `.env` di server Linux.
+Sesuaikan URL yang benar-benar dipakai browser/client, username, dan password database.
+
+CI_ENVIRONMENT = production
+
+app.baseURL = 'http://127.0.0.1:8080/'
+
+database.default.hostname = 127.0.0.1
+database.default.database = dbgudang
+database.default.username = dbgudang_user
+database.default.password = PASSWORD_KUAT
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+logger.threshold = 1
+
+Catatan:
+- Kalau akses dari host memakai NAT + port forwarding, dan kamu membukanya lewat `http://127.0.0.1:8080/`, maka isi `app.baseURL` dengan URL itu
+- Kalau kamu pakai Bridged Adapter atau domain sendiri, ubah `app.baseURL` menjadi URL yang dipakai browser, misalnya `http://192.168.1.50/` atau `https://domain-kamu/`
+- Kalau terjadi redirect aneh karena host tidak dikenal, tambahkan IP/domain server ke `allowedHostnames` di `app/Config/App.php`
+- Untuk production, gunakan password database yang kuat dan jangan pakai admin/admin

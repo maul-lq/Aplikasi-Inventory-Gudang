@@ -1,0 +1,415 @@
+PANDUAN DEPLOY REPO INI KE LINUX SERVER VM (VIRTUALBOX)
+=====================================================
+
+Tujuan:
+- Menjalankan repo Aplikasi-Inventory-Gudang di Linux Server baru dalam VirtualBox
+- Jalur yang direkomendasikan: Ubuntu Server LTS + Apache + MariaDB + PHP + Composer
+- Panduan ini dibuat supaya bisa kamu ikuti sendiri langkah demi langkah
+
+REKOMENDASI PALING MUDAH
+-----------------------
+Saya sarankan pakai stack berikut:
+1. OS: Ubuntu Server 24.04 LTS atau 22.04 LTS
+2. Web server: Apache
+3. Database: MariaDB
+4. PHP: PHP 8.2 atau 8.3
+5. Deploy method: git clone langsung di server
+
+Kenapa ini yang saya rekomendasikan?
+- Repo ini adalah CodeIgniter 4
+- Folder public sudah punya file .htaccess, jadi Apache adalah jalur paling mudah
+- composer.json mengizinkan PHP ^8.0
+- README repo ini sudah pernah divalidasi di PHP 8.2, CodeIgniter 4.7, dan MySQL 8
+- Repo sudah punya file dump database dbgudang.sql, jadi import database akan lebih mudah dibanding setup dari nol
+
+Ringkasan requirement repo ini
+-----------------------------
+Berdasarkan repo yang saya cek:
+- Framework: CodeIgniter 4
+- Requirement PHP di composer.json: ^7.3 atau ^8.0
+- Dependency penting: codeigniter4/framework, phpspreadsheet, midtrans, datatables
+- Konfigurasi database default di app/Config/Database.php masih kosong, jadi harus diisi lewat .env
+- Repo sudah punya file .env lokal, tapi untuk server tetap perlu kamu sesuaikan
+- File dump database tersedia: dbgudang.sql
+- Login awal dari README: admin / admin
+
+Bagian 1 - Siapkan jaringan VirtualBox
+--------------------------------------
+Pilih salah satu skenario ini:
+
+A. Kalau server hanya mau diakses dari laptop/PC host kamu (PALING MUDAH)
+   Pakai NAT + Port Forwarding.
+
+   Buat rule minimal:
+   - Host Port 2222 -> Guest Port 22   (SSH)
+   - Host Port 8080 -> Guest Port 80   (HTTP)
+
+   Hasilnya nanti:
+   - SSH dari host: ssh -p 2222 user@127.0.0.1
+   - Web dari host: http://127.0.0.1:8080
+
+B. Kalau server mau diakses juga dari perangkat lain di jaringan/LAN
+   Pakai Bridged Adapter.
+
+   Hasilnya nanti:
+   - VM akan punya IP sendiri, misalnya 192.168.1.50
+   - Web diakses lewat http://192.168.1.50
+
+Rekomendasi saya:
+- Untuk belajar dan setup pertama: NAT + Port Forwarding
+- Untuk dipakai ramai-ramai di jaringan rumah/kantor: Bridged Adapter
+
+Bagian 2 - Login ke Linux server
+--------------------------------
+Masuk ke VM dan jalankan:
+
+  sudo apt update && sudo apt upgrade -y
+  timedatectl
+
+Opsional kalau timezone belum sesuai:
+
+  sudo timedatectl set-timezone Asia/Jakarta
+
+Bagian 3 - Install paket yang dibutuhkan
+----------------------------------------
+Install Apache, MariaDB, PHP, Composer, Git, dan extension PHP yang umum dipakai repo ini:
+
+  sudo apt install -y apache2 mariadb-server git unzip curl composer \
+    php php-cli libapache2-mod-php php-mysql php-curl php-gd php-intl \
+    php-mbstring php-xml php-zip
+
+Lalu cek versi:
+
+  php -v
+  composer --version
+  apache2 -v
+  mysql --version
+
+Bagian 4 - Aktifkan service server
+----------------------------------
+Jalankan:
+
+  sudo systemctl enable --now apache2
+  sudo systemctl enable --now mariadb
+
+Cek status:
+
+  sudo systemctl status apache2 --no-pager
+  sudo systemctl status mariadb --no-pager
+
+Bagian 5 - Siapkan folder project
+---------------------------------
+Saya sarankan simpan project di /var/www:
+
+  cd /var/www
+  sudo git clone <URL-REPO-KAMU> aplikasi-inventory-gudang
+  sudo chown -R $USER:$USER /var/www/aplikasi-inventory-gudang
+  cd /var/www/aplikasi-inventory-gudang
+
+Kalau repo belum online dan masih lokal di Windows, opsi termudah:
+- push dulu repo ke GitHub/GitLab/private Git
+- lalu git clone dari Linux server
+
+Alternatif kalau belum mau push ke Git:
+- copy folder repo ke VM pakai shared folder / scp / rsync
+
+Bagian 6 - Install dependency Composer untuk production
+-------------------------------------------------------
+Di root project jalankan:
+
+  composer install --no-dev -o
+
+Penjelasan singkat:
+- --no-dev = tidak install paket development yang tidak dibutuhkan production
+- -o       = optimize autoloader agar lebih cepat
+
+Lalu verifikasi requirement PHP/ext di server:
+
+  composer check-platform-reqs
+
+Bagian 7 - Siapkan file environment
+-----------------------------------
+Repo ini sudah punya file .env. Edit file itu dan sesuaikan untuk server:
+
+  nano .env
+
+Nilai yang minimal perlu diubah:
+
+  CI_ENVIRONMENT = production
+
+  app.baseURL = 'http://IP-ATAU-DOMAIN-KAMU/'
+
+  database.default.hostname = 127.0.0.1
+  database.default.database = dbgudang
+  database.default.username = dbgudang_user
+  database.default.password = PASSWORD_KUAT
+  database.default.DBDriver = MySQLi
+  database.default.DBPrefix =
+  database.default.port = 3306
+
+Catatan penting:
+- Kalau pakai NAT + port forwarding dan akses dari host lewat http://127.0.0.1:8080,
+  isi app.baseURL sesuai alamat yang benar-benar kamu buka di browser,
+  misalnya: http://127.0.0.1:8080/
+- Kalau pakai Bridged Adapter atau domain, isi app.baseURL dengan URL akses sebenarnya,
+  misalnya: http://IP-VM/ atau http://NAMA-DOMAIN/
+- Kalau belum punya domain, gunakan IP VM saat ini
+- Untuk production, jangan biarkan password database tetap admin/admin
+- Kalau logger.threshold di .env masih tinggi, boleh turunkan untuk production
+
+Kalau file .env belum ada, buat dari template:
+
+  cp env .env
+
+Bagian 8 - Buat database dan user database
+------------------------------------------
+Masuk ke MariaDB:
+
+  sudo mysql
+
+Lalu jalankan SQL berikut:
+
+  CREATE DATABASE dbgudang CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+  CREATE USER 'dbgudang_user'@'localhost' IDENTIFIED BY 'PASSWORD_KUAT';
+  GRANT ALL PRIVILEGES ON dbgudang.* TO 'dbgudang_user'@'localhost';
+  FLUSH PRIVILEGES;
+  EXIT;
+
+Bagian 9 - Import data awal dari dump
+-------------------------------------
+Di root project jalankan:
+
+  mysql -u dbgudang_user -p dbgudang < dbgudang.sql
+
+Setelah itu, data awal dan user login dari dump akan ikut masuk.
+Dari README repo ini, login awal yang bisa dicoba adalah:
+- username: admin
+- password: admin
+
+Catatan:
+- Jangan import dump ini ke database yang sudah berisi data penting tanpa backup
+- Dump bisa menimpa tabel yang sudah ada
+
+Bagian 10 - Permission folder yang wajib bisa ditulis
+-----------------------------------------------------
+CodeIgniter 4 butuh folder writable bisa ditulis server web.
+Jalankan:
+
+  sudo chown -R www-data:www-data writable
+  sudo find writable -type d -exec chmod 775 {} \;
+  sudo find writable -type f -exec chmod 664 {} \;
+
+Kalau nanti fitur upload file gagal, cek juga apakah ada folder upload lain di luar writable
+yang perlu diubah ownership-nya ke www-data.
+
+Bagian 11 - Konfigurasi Apache (REKOMENDASI)
+--------------------------------------------
+Poin paling penting untuk CodeIgniter 4:
+DocumentRoot harus diarahkan ke folder public, BUKAN ke root project.
+
+Buat virtual host:
+
+  sudo nano /etc/apache2/sites-available/aplikasi-inventory-gudang.conf
+
+Isi file:
+
+  <VirtualHost *:80>
+      ServerName IP-ATAU-DOMAIN-KAMU
+      DocumentRoot /var/www/aplikasi-inventory-gudang/public
+
+      <Directory /var/www/aplikasi-inventory-gudang/public>
+          AllowOverride All
+          Require all granted
+      </Directory>
+
+      ErrorLog ${APACHE_LOG_DIR}/inventory-error.log
+      CustomLog ${APACHE_LOG_DIR}/inventory-access.log combined
+  </VirtualHost>
+
+Lalu aktifkan site dan mod_rewrite:
+
+  sudo a2enmod rewrite
+  sudo a2ensite aplikasi-inventory-gudang.conf
+  sudo a2dissite 000-default.conf
+  sudo apache2ctl configtest
+  sudo systemctl reload apache2
+
+Bagian 12 - Firewall
+--------------------
+Kalau UFW aktif, buka port yang dibutuhkan:
+
+  sudo ufw allow OpenSSH
+  sudo ufw allow 'Apache Full'
+  sudo ufw enable
+  sudo ufw status
+
+Bagian 13 - Optimasi CodeIgniter setelah app sudah jalan
+--------------------------------------------------------
+Setelah aplikasi bisa dibuka dengan normal, jalankan:
+
+  php spark optimize
+
+Catatan penting:
+- Jalankan ini setelah konfigurasi .env sudah final
+- Kalau nanti mengubah config/.env, biasanya aman untuk clear cache dulu:
+
+  php spark optimize:clear
+
+Lalu jalankan lagi:
+
+  php spark optimize
+
+Bagian 14 - Verifikasi deploy
+-----------------------------
+Jalankan pengecekan berikut satu per satu:
+
+1. Cek Apache dan MariaDB:
+
+  sudo systemctl status apache2 --no-pager
+  sudo systemctl status mariadb --no-pager
+
+2. Cek requirement Composer:
+
+  composer check-platform-reqs
+
+3. Cek CodeIgniter bisa boot:
+
+  php spark
+
+4. Cek route:
+
+  php spark routes
+
+5. Cek HTTP dari dalam VM:
+
+  curl -I http://127.0.0.1
+
+6. Cek dari host:
+
+  - Kalau NAT + port forwarding:
+    buka http://127.0.0.1:8080
+
+  - Kalau Bridged Adapter:
+    buka http://IP-VM-KAMU
+
+7. Coba login aplikasi:
+
+  username: admin
+  password: admin
+
+Bagian 15 - Cara update deploy berikutnya
+-----------------------------------------
+Kalau nanti ada perubahan code dan kamu mau deploy ulang:
+
+  cd /var/www/aplikasi-inventory-gudang
+  git pull
+  composer install --no-dev -o
+  php spark optimize:clear
+  php spark optimize
+  sudo systemctl reload apache2
+
+Kalau ada perubahan database:
+- backup database dulu
+- lalu jalankan import atau migration sesuai kebutuhan
+
+Bagian 16 - Troubleshooting paling umum
+---------------------------------------
+1. Halaman 404 / asset tidak tampil
+   - pastikan DocumentRoot mengarah ke /public
+   - pastikan mod_rewrite aktif
+   - pastikan AllowOverride All ada di virtual host
+
+2. Error koneksi database
+   - cek database.default.* di .env
+   - cek user/password database
+   - cek MariaDB aktif
+   - coba login manual:
+
+     mysql -u dbgudang_user -p
+
+3. Permission denied pada logs/cache/session/upload
+   - cek folder writable dimiliki oleh www-data
+   - ulangi langkah permission di Bagian 10
+
+4. URL redirect salah / balik ke localhost
+   - cek app.baseURL di .env
+   - kalau perlu, sesuaikan juga allowedHostnames di app/Config/App.php
+     agar memuat IP/domain server kamu
+
+5. composer install gagal karena extension PHP kurang
+   - install extension yang diminta Composer
+   - lalu ulangi:
+
+     composer check-platform-reqs
+
+6. Tidak bisa akses VM dari host
+   - kalau pakai NAT, cek port forwarding
+   - kalau pakai Bridged, cek IP VM dengan:
+
+     ip a
+
+Bagian 17 - Urutan kerja tercepat yang saya sarankan
+----------------------------------------------------
+Kalau mau jalur paling praktis, ikuti urutan ini:
+
+1. Buat VM Ubuntu Server
+2. Pakai NAT + port forwarding (2222->22 dan 8080->80)
+3. Install Apache + MariaDB + PHP + Composer
+4. Clone repo ke /var/www/aplikasi-inventory-gudang
+5. Jalankan composer install --no-dev -o
+6. Edit .env untuk baseURL dan database
+7. Buat database + user database
+8. Import dbgudang.sql
+9. Set permission folder writable
+10. Buat Apache VirtualHost ke folder public
+11. Reload Apache
+12. Jalankan php spark dan composer check-platform-reqs
+13. Buka aplikasi dari host di http://127.0.0.1:8080
+14. Login dengan admin/admin
+15. Setelah stabil, jalankan php spark optimize
+
+File bantu yang sudah saya siapkan di repo ini
+----------------------------------------------
+Supaya lebih cepat copy-paste, gunakan juga file berikut:
+
+1. contoh-env-production-linux-vm.txt
+   - berisi contoh isi `.env` production untuk server Linux
+
+2. contoh-apache-vhost-linux-vm.txt
+   - berisi contoh file VirtualHost Apache yang sudah diarahkan ke folder `public`
+
+Kalau kamu deploy langkah demi langkah, buka panduan utama ini sambil menyalin isi dari dua file bantu tersebut.
+
+Checklist selesai
+-----------------
+[ ] VM Linux aktif dan punya internet
+[ ] Apache, MariaDB, PHP, Composer terinstall
+[ ] Repo sudah ada di /var/www/aplikasi-inventory-gudang
+[ ] composer install --no-dev -o berhasil
+[ ] .env production sudah disesuaikan
+[ ] Database dbgudang dan user database sudah dibuat
+[ ] dbgudang.sql sudah diimport
+[ ] writable sudah punya permission yang benar
+[ ] Apache DocumentRoot mengarah ke /public
+[ ] php spark berhasil
+[ ] composer check-platform-reqs berhasil
+[ ] Website bisa dibuka
+[ ] Login admin/admin berhasil
+
+Sumber rujukan yang saya pakai
+------------------------------
+1. Dokumentasi resmi CodeIgniter 4 - Deployment / optimization production
+   https://codeigniter4.github.io/userguide/installation/deployment.html
+2. Dokumentasi resmi CodeIgniter 4 - Configuration / environment variables (.env)
+   https://codeigniter4.github.io/userguide/general/configuration.html
+3. Dokumentasi resmi Composer - command line / install / check-platform-reqs
+   https://getcomposer.org/doc/03-cli.md
+4. Dokumentasi resmi Composer - autoloader optimization
+   https://getcomposer.org/doc/articles/autoloader-optimization.md
+5. Dokumentasi resmi Oracle VirtualBox - NAT, port forwarding, dan bridged networking
+   https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/networkingdetails.html
+
+Kalau kamu mau, langkah berikutnya yang paling berguna adalah:
+- saya bisa buatkan versi yang lebih singkat (1 halaman)
+- saya bisa buatkan versi khusus Ubuntu + NAT port forwarding saja
+- saya bisa buatkan file konfigurasi Apache dan contoh .env production yang siap copy-paste

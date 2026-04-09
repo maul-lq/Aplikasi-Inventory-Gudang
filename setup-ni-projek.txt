@@ -1,0 +1,570 @@
+PANDUAN STEP BY STEP MEMPERBAIKI REPO INI SAMPAI JALAN
+======================================================
+
+File ini merangkum langkah yang dipakai untuk memperbaiki repo
+`Aplikasi-Inventory-Gudang` sampai:
+
+- framework CodeIgniter bisa boot di PHP 8.2
+- koneksi MySQL Server lokal jalan
+- test bawaan bisa lewat
+- halaman login bisa dibuka
+- login `admin/admin` berhasil
+- asset AdminLTE tidak lagi 404
+
+
+0. Ringkasan masalah awal
+-------------------------
+
+Saat repo ini pertama dibuka, ada beberapa masalah utama:
+
+1. Repo masih memakai skeleton/config CodeIgniter 4 versi lama.
+   Akibatnya `php spark`, `php spark routes`, dan `phpunit` gagal boot.
+
+2. Konfigurasi database default kosong.
+   Akibatnya aplikasi tidak siap jalan setelah clone.
+
+3. Config penting generasi baru belum ada.
+   Contohnya `app/Config/Routing.php` dan `app/Config/Session.php`.
+
+4. `App.php` dan `Exceptions.php` masih model lama.
+   Ini memicu masalah runtime di HTTP dan deprecation/error pada PHP 8.2.
+
+5. Folder `public/dist` tidak ada.
+   Akibatnya file seperti `adminlte.min.css` dan `adminlte.min.js`
+   selalu 404 di browser.
+
+
+1. Masuk ke folder proyek
+-------------------------
+
+Jalankan di PowerShell:
+
+```powershell
+cd "C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang"
+```
+
+
+2. Cek tool dasar yang wajib ada
+--------------------------------
+
+Pastikan ini tersedia:
+
+```powershell
+php -v
+composer --version
+```
+
+Pastikan MySQL Server service aktif:
+
+```powershell
+Get-Service *mysql* | Select-Object Status,Name,DisplayName
+```
+
+Kalau service aktifnya `MySQL80`, pakai client MySQL Server resmi:
+
+```powershell
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -padmin -e "SELECT VERSION();"
+```
+
+Catatan:
+- Jangan pakai `C:\xampp\mysql\bin\mysql.exe` kalau muncul error
+  `caching_sha2_password`.
+- Untuk repo ini, client yang aman dipakai adalah client dari MySQL Server.
+
+
+3. Install dependency Composer
+------------------------------
+
+Jalankan:
+
+```powershell
+composer install --no-interaction --prefer-dist
+```
+
+Setelah ini, folder `vendor/` akan dibuat.
+
+
+4. Siapkan konfigurasi lokal `.env`
+-----------------------------------
+
+Buat file `.env` di root proyek. Isi minimalnya:
+
+```dotenv
+CI_ENVIRONMENT = development
+
+app.baseURL = 'http://localhost:8080/'
+
+database.default.hostname = 127.0.0.1
+database.default.database = dbgudang
+database.default.username = root
+database.default.password = admin
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+```
+
+Kalau mau menyiapkan database test untuk PHPUnit juga, tambahkan:
+
+```dotenv
+database.tests.hostname = 127.0.0.1
+database.tests.database = dbgudang_tests
+database.tests.username = root
+database.tests.password = admin
+database.tests.DBDriver = MySQLi
+database.tests.DBPrefix = db_
+database.tests.port = 3306
+```
+
+
+5. Cek database aplikasi `dbgudang`
+-----------------------------------
+
+Sebelum import, cek apakah database `dbgudang` sudah ada:
+
+```powershell
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -padmin -N -e "SHOW DATABASES LIKE 'dbgudang';"
+```
+
+Kalau belum ada, buat database:
+
+```powershell
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -padmin -e "CREATE DATABASE IF NOT EXISTS dbgudang CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+```
+
+Kalau databasenya kosong, import dump:
+
+```powershell
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -padmin dbgudang -e "SOURCE C:/Users/Rizlrad Fz/Koding/Codeigneter 4/Aplikasi-Inventory-Gudang/dbgudang.sql"
+```
+
+Penting:
+- Kalau `dbgudang` sudah berisi data yang ingin dipertahankan, jangan import dump
+  langsung tanpa backup.
+- Dump ini berisi `DROP TABLE`, jadi bisa menimpa isi tabel yang sudah ada.
+
+
+6. Buat database test untuk PHPUnit
+-----------------------------------
+
+Supaya test database tidak memakai SQLite bawaan starter, buat schema test:
+
+```powershell
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -uroot -padmin -e "CREATE DATABASE IF NOT EXISTS dbgudang_tests CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
+```
+
+Lalu buat `phpunit.xml` di root proyek dengan isi yang menimpa group
+`database.tests` ke MySQL test DB.
+
+Isi minimal yang penting:
+
+```xml
+<env name="database.tests.hostname" value="127.0.0.1"/>
+<env name="database.tests.database" value="dbgudang_tests"/>
+<env name="database.tests.username" value="root"/>
+<env name="database.tests.password" value="admin"/>
+<env name="database.tests.DBDriver" value="MySQLi"/>
+<env name="database.tests.DBPrefix" value="db_"/>
+<env name="database.tests.port" value="3306"/>
+```
+
+
+7. Perbaiki bootstrap CodeIgniter 4 yang masih lama
+---------------------------------------------------
+
+Repo ini awalnya gagal boot karena top-level `spark` dan `public/index.php`
+masih memakai pola lama (`system/bootstrap.php`).
+
+Yang harus dilakukan:
+
+1. Sinkronkan `spark` ke pola CI4 modern berbasis `CodeIgniter\Boot`.
+2. Sinkronkan `public/index.php` ke pola CI4 modern berbasis `Boot::bootWeb`.
+3. Pastikan `app/Config/Autoload.php` punya property `helpers`.
+4. Pastikan `app/Config/Paths.php` punya `envDirectory`.
+
+File yang perlu dibandingkan atau sinkronkan:
+
+- `spark`
+- `public/index.php`
+- `app/Config/Autoload.php`
+- `app/Config/Paths.php`
+- `app/Config/Modules.php`
+- `app/Config/Kint.php`
+- `app/Config/Routes.php`
+
+Cara paling aman:
+- bandingkan file-file itu dengan template CI4 yang baru di `vendor/codeigniter4/framework/app/Config`
+- adopsi struktur baru, tapi pertahankan kebutuhan proyek ini
+
+Checklist per-file yang konkret:
+
+- `spark`
+  - harus memakai `use CodeIgniter\Boot;`
+  - harus memakai `use Config\Paths;`
+  - harus `require FCPATH . '../app/Config/Paths.php';`
+  - harus `require $paths->systemDirectory . '/Boot.php';`
+  - harus berakhir dengan `exit(Boot::bootSpark($paths));`
+
+- `public/index.php`
+  - harus memakai `use CodeIgniter\Boot;`
+  - harus memakai `use Config\Paths;`
+  - harus `require FCPATH . '../app/Config/Paths.php';`
+  - harus `require $paths->systemDirectory . '/Boot.php';`
+  - harus berakhir dengan `exit(Boot::bootWeb($paths));`
+
+- `app/Config/Autoload.php`
+  - harus punya property `public $helpers = [];`
+  - namespace `App` cukup mengarah ke `APPPATH`
+  - jangan lagi mengandalkan struktur autoload skeleton lama
+
+- `app/Config/Paths.php`
+  - harus menunjuk `systemDirectory` ke `vendor/codeigniter4/framework/system`
+  - harus punya `envDirectory`
+  - `viewDirectory` tetap ke `app/Views`
+
+- `app/Config/Modules.php`
+  - pastikan kompatibel dengan base class baru
+  - pastikan property `composerPackages` tersedia
+
+- `app/Config/Kint.php`
+  - sinkronkan ke struktur Kint config baru
+  - pastikan type/property plugin sesuai template modern
+
+
+8. Tambahkan config yang hilang
+-------------------------------
+
+Repo lama ini belum punya config yang sekarang diwajibkan framework.
+
+Tambahkan file berikut kalau belum ada:
+
+1. `app/Config/Routing.php`
+   Tujuan:
+   - menyediakan object `Config\Routing`
+   - memindahkan default routing modern dari service langsung ke config
+
+2. `app/Config/Session.php`
+   Tujuan:
+   - menyediakan `Config\Session`
+   - memakai file session di `WRITEPATH . 'session'`
+
+Checklist per-file yang konkret:
+
+- `app/Config/Routing.php`
+  - class harus `extends CodeIgniter\Config\Routing`
+  - harus mendefinisikan `routeFiles`
+  - harus punya default:
+    - `defaultNamespace`
+    - `defaultController`
+    - `defaultMethod`
+    - `translateURIDashes`
+    - `override404`
+    - `autoRoute`
+
+- `app/Config/Session.php`
+  - class harus `extends BaseConfig`
+  - driver default gunakan `FileHandler::class`
+  - `savePath` harus ke `WRITEPATH . 'session'`
+  - `DBGroup` boleh `null`
+
+
+9. Modernisasi `app/Config/App.php`
+-----------------------------------
+
+`app/Config/App.php` lama membawa banyak property legacy:
+
+- config session lama
+- config cookie lama
+- config csrf lama
+
+Di CI4 yang lebih baru, bagian itu sudah dipisah ke config lain.
+
+Yang perlu dilakukan:
+
+1. Ganti `App.php` ke bentuk yang lebih modern.
+2. Pertahankan nilai proyek yang masih relevan:
+   - `baseURL`
+   - `allowedHostnames`
+   - `indexPage`
+   - `uriProtocol`
+   - `defaultLocale`
+   - `supportedLocales`
+   - `appTimezone`
+   - `charset`
+   - `proxyIPs`
+   - `CSPEnabled`
+
+Setelah ini, error HTTP seperti masalah `proxyIPs` dan request/session
+akan hilang.
+
+Checklist per-file yang konkret:
+
+- hapus ketergantungan pada property session legacy di `App.php`
+- sisakan property inti:
+  - `baseURL`
+  - `allowedHostnames`
+  - `indexPage`
+  - `uriProtocol`
+  - `permittedURIChars`
+  - `defaultLocale`
+  - `negotiateLocale`
+  - `supportedLocales`
+  - `appTimezone`
+  - `charset`
+  - `forceGlobalSecureRequests`
+  - `proxyIPs`
+  - `CSPEnabled`
+- pastikan `proxyIPs` berupa array kosong `[]`, bukan string kosong
+
+
+10. Modernisasi `app/Config/Exceptions.php`
+-------------------------------------------
+
+File ini juga masih gaya lama.
+
+Tambahkan properti modern seperti:
+
+- `logDeprecations`
+- `deprecationLogLevel`
+- `handler()`
+
+Tujuannya:
+- menghilangkan warning compat CI4 baru
+- menghindari error saat HTTP request men-trigger error handler modern
+
+Checklist per-file yang konkret:
+
+- `log` tetap `true`
+- `ignoreCodes` minimal berisi `404`
+- `errorViewPath` tetap ke `APPPATH . 'Views/errors'`
+- tambahkan `logDeprecations`
+- tambahkan `deprecationLogLevel`
+- tambahkan method `handler(int $statusCode, Throwable $exception)`
+
+
+11. Perbaiki `BaseController` untuk PHP 8.2
+-------------------------------------------
+
+Tambahkan property session secara eksplisit.
+
+Masalahnya:
+- PHP 8.2 tidak suka dynamic property
+- kalau `$this->session` dibuat tanpa deklarasi property, bisa memicu deprecation
+
+Perbaikan:
+- tambahkan type/property `Session $session`
+- lalu isi di `initController()`
+
+
+12. Jalankan verifikasi CLI
+---------------------------
+
+Setelah langkah config/bootstrap di atas selesai, jalankan:
+
+```powershell
+php spark
+php spark routes
+vendor\bin\phpunit
+```
+
+Target hasil:
+- `php spark` sukses dan menampilkan daftar command
+- `php spark routes` sukses
+- `phpunit` sukses dengan `OK (5 tests, 7 assertions)`
+
+
+13. Perbaiki asset 404 AdminLTE
+-------------------------------
+
+Kalau browser menampilkan 404 seperti:
+
+- `adminlte.min.css`
+- `adminlte.min.js`
+- `AdminLTELogo.png`
+
+penyebabnya adalah folder `public/dist` tidak ada.
+
+View proyek ini memang memanggil asset:
+
+- `dist/css/adminlte.min.css`
+- `dist/js/adminlte.min.js`
+- `dist/js/demo.js`
+- `dist/img/AdminLTELogo.png`
+- `dist/img/user2-160x160.jpg`
+
+Solusinya:
+- buat folder `public/dist/css`
+- buat folder `public/dist/js`
+- buat folder `public/dist/img`
+- isi file-file yang hilang dari paket AdminLTE 3.2
+
+Contoh command PowerShell:
+
+```powershell
+$dirs = @('public/dist','public/dist/css','public/dist/js','public/dist/img')
+foreach ($dir in $dirs) { New-Item -ItemType Directory -Force -Path $dir | Out-Null }
+
+$files = @(
+  @('https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css','public/dist/css/adminlte.min.css'),
+  @('https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js','public/dist/js/adminlte.min.js'),
+  @('https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/demo.js','public/dist/js/demo.js'),
+  @('https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/img/AdminLTELogo.png','public/dist/img/AdminLTELogo.png'),
+  @('https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/img/user2-160x160.jpg','public/dist/img/user2-160x160.jpg')
+)
+
+foreach ($pair in $files) {
+  Invoke-WebRequest -Uri $pair[0] -OutFile $pair[1]
+}
+```
+
+Lalu cek:
+
+```powershell
+Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8080/dist/css/adminlte.min.css
+Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8080/dist/js/adminlte.min.js
+Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8080/dist/img/AdminLTELogo.png
+```
+
+Semua harus balas `200`.
+
+
+14. Jalankan server lokal
+-------------------------
+
+Pakai:
+
+```powershell
+php spark serve --host 127.0.0.1 --port 8080
+```
+
+Buka:
+
+```text
+http://127.0.0.1:8080/
+```
+
+
+15. Login di browser
+--------------------
+
+Login yang tervalidasi:
+
+- Username: `admin`
+- Password: `admin`
+
+User lain yang ada di dump:
+
+- `gudang`
+- `kasir`
+- `kasir2` (nonaktif)
+
+
+16. Verifikasi akhir di browser
+-------------------------------
+
+Cek minimal ini:
+
+1. `GET /` -> harus `200`
+2. halaman login tampil tanpa 404 asset utama
+3. login `admin/admin` berhasil
+4. `GET /main/index` setelah login -> `200`
+5. `GET /main/index` tanpa session -> `302` ke login
+
+Kalau browser masih pakai cache lama, tekan:
+
+```text
+Ctrl + F5
+```
+
+
+17. File yang akhirnya memang berubah
+-------------------------------------
+
+Perubahan inti biasanya jatuh di file ini:
+
+- `spark`
+- `public/index.php`
+- `app/Config/Autoload.php`
+- `app/Config/Paths.php`
+- `app/Config/Modules.php`
+- `app/Config/Kint.php`
+- `app/Config/Routing.php`
+- `app/Config/Routes.php`
+- `app/Config/Session.php`
+- `app/Config/App.php`
+- `app/Config/Exceptions.php`
+- `app/Controllers/BaseController.php`
+- `.gitignore`
+- `README.md`
+- `composer.lock`
+- `public/dist/*`
+- `.env`
+- `phpunit.xml`
+
+
+18. Masalah yang masih mungkin tersisa
+--------------------------------------
+
+Walau repo sudah jalan, masih ada area yang sebaiknya diuji manual:
+
+1. Filter role di `app/Config/Filters.php`
+   Desainnya masih legacy dan memakai redirect global before/after.
+
+2. Flow Midtrans/payment
+   Belum diuji end-to-end.
+
+3. Modul bisnis:
+   - barang masuk
+   - barang keluar
+   - laporan
+   - backup utility
+
+4. Warning `tput` pada Windows saat `php spark`
+   Ini tidak memblokir aplikasi, tapi memang masih muncul di CLI.
+
+
+19. Checklist cepat kalau mau mengulang dari nol
+------------------------------------------------
+
+Ikuti urutan ini:
+
+1. Clone repo
+2. `composer install`
+3. Buat `.env`
+4. Siapkan `dbgudang`
+5. Siapkan `dbgudang_tests`
+6. Modernisasi bootstrap/config CI4
+7. Tambahkan `Routing.php` dan `Session.php`
+8. Modernisasi `App.php` dan `Exceptions.php`
+9. Perbaiki `BaseController`
+10. Jalankan `php spark`
+11. Jalankan `php spark routes`
+12. Jalankan `vendor\bin\phpunit`
+13. Restore `public/dist`
+14. Jalankan `php spark serve`
+15. Login `admin/admin`
+16. Refresh browser dan cek 404 asset
+
+
+20. Penutup
+-----------
+
+Kalau Anda mengikuti urutan di atas, repo ini bisa dipulihkan dari kondisi
+clone mentah sampai:
+
+- boot CLI sukses
+- koneksi DB sukses
+- test bawaan sukses
+- login browser sukses
+- dashboard terbuka
+- asset AdminLTE utama tidak lagi 404
+
+Kalau nanti masih mentok di salah satu langkah, cara debug tercepat adalah:
+
+1. cek command yang gagal
+2. baca error persisnya
+3. cocokkan dengan bagian langkah di atas
+4. perbaiki satu lapis dulu:
+   - bootstrap
+   - config
+   - database
+   - asset
+   - browser/runtime

@@ -1,0 +1,32 @@
+CONTOH APACHE VHOST UNTUK LINUX VM
+=================================
+
+Simpan isi ini ke file berikut di server Linux:
+  /etc/apache2/sites-available/aplikasi-inventory-gudang.conf
+
+Isi file:
+
+<VirtualHost *:80>
+    ServerName IP-ATAU-DOMAIN-KAMU
+    DocumentRoot /var/www/aplikasi-inventory-gudang/public
+
+    <Directory /var/www/aplikasi-inventory-gudang/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/inventory-error.log
+    CustomLog ${APACHE_LOG_DIR}/inventory-access.log combined
+</VirtualHost>
+
+Perintah setelah file dibuat:
+  sudo a2enmod rewrite
+  sudo a2ensite aplikasi-inventory-gudang.conf
+  sudo a2dissite 000-default.conf
+  sudo apache2ctl configtest
+  sudo systemctl reload apache2
+
+Catatan penting:
+- DocumentRoot harus ke folder `/public`, bukan ke root repo
+- Kalau pakai domain, ganti `ServerName` dengan domain kamu
+- Kalau masih belajar pakai NAT + port forwarding, `ServerName` boleh diisi IP VM atau localhost sesuai kebutuhan uji akses
