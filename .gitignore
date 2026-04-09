@@ -5,7 +5,3 @@ build/
 phpunit.xml
 .phpunit.result.cache
 .phpunit.cache/
-
-
-writable/debugbar/*.json
-writable/sessions/
