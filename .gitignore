@@ -1,0 +1,9 @@
+vendor/
+.omx/
+writable/
+build/
+.env
+phpunit.xml
+.phpunit.result.cache
+.phpunit.cache/
+*.txt
