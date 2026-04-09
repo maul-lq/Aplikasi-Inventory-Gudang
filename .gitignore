@@ -1,6 +1,5 @@
 vendor/
 .omx/
-writable/
 build/
 .env
 phpunit.xml

@@ -137,7 +137,7 @@ Nilai yang minimal perlu diubah:
 
   CI_ENVIRONMENT = production
 
-  app.baseURL = 'http://IP-ATAU-DOMAIN-KAMU/'
+  app.baseURL = 'http://IP-ATAU-DOMAIN-KAMU/' \ 192.168.43.247
 
   database.default.hostname = 127.0.0.1
   database.default.database = dbgudang

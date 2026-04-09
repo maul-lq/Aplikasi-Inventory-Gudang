@@ -1,0 +1,486 @@
+CRITICAL - 2026-04-02 06:18:03 --> Error: Class "Kint\Renderer\Renderer" not found
+[Method: GET, Route: /]
+in APPPATH\Config\Kint.php on line 38.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(498): CodeIgniter\Autoloader\Autoloader->configureKint()
+ 2 SYSTEMPATH\Boot.php(385): CodeIgniter\Autoloader\Autoloader->initializeKint(true)
+ 3 SYSTEMPATH\Boot.php(160): CodeIgniter\Boot::initializeKint()
+ 4 ROOTPATH\spark(51): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:18:59 --> TypeError: CodeIgniter\Router\RouteCollection::__construct(): Argument #3 ($routing) must be of type Config\Routing, null given, called in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Config\Services.php on line 622
+[Method: CLI, Route: /]
+in SYSTEMPATH\Router\RouteCollection.php on line 280.
+ 1 SYSTEMPATH\Config\Services.php(622): CodeIgniter\Router\RouteCollection->__construct(Object(CodeIgniter\Autoloader\FileLocator), Object(Config\Modules), null)
+ 2 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::routes(false)
+ 3 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('routes', [...])
+ 4 SYSTEMPATH\Config\Services.php(619): CodeIgniter\Config\BaseService::getSharedInstance('routes')
+ 5 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::routes()
+ 6 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('routes', [])
+ 7 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('routes')
+ 8 SYSTEMPATH\CLI\Console.php(41): service('routes')
+ 9 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+10 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+11 ROOTPATH\spark(51): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:18:59 --> TypeError: CodeIgniter\Router\RouteCollection::__construct(): Argument #3 ($routing) must be of type Config\Routing, null given, called in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Config\Services.php on line 622
+[Method: CLI, Route: routes]
+in SYSTEMPATH\Router\RouteCollection.php on line 280.
+ 1 SYSTEMPATH\Config\Services.php(622): CodeIgniter\Router\RouteCollection->__construct(Object(CodeIgniter\Autoloader\FileLocator), Object(Config\Modules), null)
+ 2 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::routes(false)
+ 3 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('routes', [...])
+ 4 SYSTEMPATH\Config\Services.php(619): CodeIgniter\Config\BaseService::getSharedInstance('routes')
+ 5 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::routes()
+ 6 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('routes', [])
+ 7 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('routes')
+ 8 SYSTEMPATH\CLI\Console.php(41): service('routes')
+ 9 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+10 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+11 ROOTPATH\spark(51): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:19:03 --> TypeError: CodeIgniter\Router\RouteCollection::__construct(): Argument #3 ($routing) must be of type Config\Routing, null given, called in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Config\Services.php on line 622
+[Method: CLI, Route: /]
+in SYSTEMPATH\Router\RouteCollection.php on line 280.
+ 1 SYSTEMPATH\Config\Services.php(622): CodeIgniter\Router\RouteCollection->__construct(Object(CodeIgniter\Autoloader\FileLocator), Object(Config\Modules), null)
+ 2 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::routes(false)
+ 3 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('routes', [...])
+ 4 SYSTEMPATH\Config\Services.php(619): CodeIgniter\Config\BaseService::getSharedInstance('routes')
+ 5 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::routes()
+ 6 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('routes', [])
+ 7 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('routes')
+ 8 SYSTEMPATH\CLI\Console.php(41): service('routes')
+ 9 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+10 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+11 ROOTPATH\spark(51): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:23:09 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:20 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:21 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:22 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: POST, Route: login/cekuser]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:23 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: POST, Route: login/cekuser]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:24 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: GET, Route: /]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 9 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:23:34 --> ErrorException: foreach() argument must be of type array|object, string given
+[Method: GET, Route: main/index]
+in SYSTEMPATH\HTTP\RequestTrait.php on line 89.
+ 1 SYSTEMPATH\HTTP\RequestTrait.php(89): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, string given', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\HTTP\\RequestTrait.php', 89)
+ 2 SYSTEMPATH\Config\Services.php(702): CodeIgniter\HTTP\Request->getIPAddress()
+ 3 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 4 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 5 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 6 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::session()
+ 7 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('session', [])
+ 8 SYSTEMPATH\Common.php(1078): CodeIgniter\Config\BaseService::get('session')
+ 9 SYSTEMPATH\Common.php(1051): service('session')
+10 APPPATH\Filters\Filteradmin.php(14): session()
+11 SYSTEMPATH\Filters\Filters.php(241): App\Filters\Filteradmin->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+12 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+13 SYSTEMPATH\CodeIgniter.php(465): CodeIgniter\Filters\Filters->run('main/index', 'before')
+14 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+16 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+17 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+18 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:12 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: POST, Route: login/cekuser]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:13 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: POST, Route: login/cekuser]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:13 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: GET, Route: /]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:19 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: GET, Route: login/index]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:35 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: GET, Route: /]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+CRITICAL - 2026-04-02 11:24:35 --> ErrorException: Creation of dynamic property App\Controllers\Login::$session is deprecated
+[Method: GET, Route: /]
+in APPPATH\Controllers\BaseController.php on line 50.
+ 1 APPPATH\Controllers\BaseController.php(50): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Creation of dynamic property App\\Controllers\\Login::$session is deprecated', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\app\\Controllers\\BaseController.php', 50)
+ 2 SYSTEMPATH\CodeIgniter.php(922): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+ 3 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')
+ERROR - 2026-04-02 11:32:17 --> Unknown table 'dbgudang_tests.db_factories'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('DROP TABLE `db_factories`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('DROP TABLE `db_factories`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('DROP TABLE `db_factories`')
+ 4 SYSTEMPATH\Database\Forge.php(663): CodeIgniter\Database\BaseConnection->query('DROP TABLE `db_factories`')
+ 5 ROOTPATH\tests\_support\Database\Migrations\2020-02-22-222222_example_migration.php(35): CodeIgniter\Database\Forge->dropTable('factories')
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): Tests\Support\Database\Migrations\ExampleMigration->down()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(323): CodeIgniter\Database\MigrationRunner->migrate('down', Object(stdClass))
+ 8 SYSTEMPATH\Test\DatabaseTestTrait.php(155): CodeIgniter\Database\MigrationRunner->regress(0, 'tests')
+ 9 SYSTEMPATH\Test\DatabaseTestTrait.php(122): ExampleDatabaseTest->regressDatabase()
+10 SYSTEMPATH\Test\DatabaseTestTrait.php(68): ExampleDatabaseTest->setUpMigrate()
+11 SYSTEMPATH\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+12 VENDORPATH\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+13 VENDORPATH\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+14 VENDORPATH\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+15 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+16 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+17 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+18 VENDORPATH\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+19 VENDORPATH\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), [...], [...], true)
+20 VENDORPATH\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run([...], true)
+21 VENDORPATH\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+22 VENDORPATH\bin\phpunit(122): include('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\phpunit\\phpunit\\phpunit')
+ERROR - 2026-04-02 11:32:17 --> Unknown table 'dbgudang_tests.db_factories'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('DROP TABLE `db_factories`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('DROP TABLE `db_factories`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('DROP TABLE `db_factories`')
+ 4 SYSTEMPATH\Database\Forge.php(663): CodeIgniter\Database\BaseConnection->query('DROP TABLE `db_factories`')
+ 5 ROOTPATH\tests\_support\Database\Migrations\2020-02-22-222222_example_migration.php(35): CodeIgniter\Database\Forge->dropTable('factories')
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): Tests\Support\Database\Migrations\ExampleMigration->down()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(323): CodeIgniter\Database\MigrationRunner->migrate('down', Object(stdClass))
+ 8 SYSTEMPATH\Test\DatabaseTestTrait.php(155): CodeIgniter\Database\MigrationRunner->regress(0, 'tests')
+ 9 SYSTEMPATH\Test\DatabaseTestTrait.php(122): ExampleDatabaseTest->regressDatabase()
+10 SYSTEMPATH\Test\DatabaseTestTrait.php(68): ExampleDatabaseTest->setUpMigrate()
+11 SYSTEMPATH\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+12 VENDORPATH\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+13 VENDORPATH\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+14 VENDORPATH\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+15 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+16 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+17 VENDORPATH\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+18 VENDORPATH\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+19 VENDORPATH\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), [...], [...], true)
+20 VENDORPATH\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run([...], true)
+21 VENDORPATH\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+22 VENDORPATH\bin\phpunit(122): include('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\phpunit\\phpunit\\phpunit')
+CRITICAL - 2026-04-02 11:36:13 --> ErrorException: fwrite(): Write of 26 bytes failed with errno=22 Invalid argument
+[Method: CLI, Route: serve]
+in SYSTEMPATH\CLI\InputOutput.php on line 78.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write of 26 bytes failed with errno=22 Invalid argument', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\CLI\\InputOutput.php', 78)
+ 2 SYSTEMPATH\CLI\InputOutput.php(78): fwrite(resource (stream), 'Press Control-C to stop.
+')
+ 3 SYSTEMPATH\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(resource (stream), 'Press Control-C to stop.
+')
+ 4 SYSTEMPATH\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(resource (stream), 'Press Control-C to stop.
+')
+ 5 SYSTEMPATH\Commands\Server\Serve.php(100): CodeIgniter\CLI\CLI::write('Press Control-C to stop.')
+ 6 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 7 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 8 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Server\Serve->run([...])
+ 9 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('serve', [...])
+10 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+11 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+12 ROOTPATH\spark(78): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:36:13 --> ErrorException: Uncaught ErrorException: fwrite(): Write of 2 bytes failed with errno=22 Invalid argument in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php:78
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write...', 'C:\\Users\\Rizlra...', 78)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php(78): fwrite(Resource id #2, '\r\n')
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(Resource id #2, '\r\n')
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(Resource id #2, '\r\n')
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(549): CodeIgniter\CLI\CLI::write()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\app\Views\errors\cli\error_exception.php(6): CodeIgniter\CLI\CLI::newLine()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\BaseExceptionHandler.php(270): include('C:\\Users\\Rizlra...')
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\BaseExceptionHandler.php(273): CodeIgniter\Debug\BaseExceptionHandler->CodeIgniter\Debug\{closure}()
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\ExceptionHandler.php(126): CodeIgniter\Debug\BaseExceptionHandler->render(Object(ErrorException), 500, 'C:\\Users\\Rizlra...')
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\Exceptions.php(151): CodeIgniter\Debug\ExceptionHandler->handle(Object(ErrorException), Object(CodeIgniter\HTTP\CLIRequest), Object(CodeIgniter\HTTP\Response), 500, 1)
+#10 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#11 {main}
+  thrown
+【Previous Exception】
+ErrorException
+fwrite(): Write of 26 bytes failed with errno=22 Invalid argument
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write...', 'C:\\Users\\Rizlra...', 78)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php(78): fwrite(Resource id #2, 'Press Control-C...')
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(Resource id #2, 'Press Control-C...')
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(Resource id #2, 'Press Control-C...')
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(100): CodeIgniter\CLI\CLI::write('Press Control-C...')
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run(Array)
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run(Array)
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\Commands.php(74): CodeIgniter\Commands\Server\Serve->run(Array)
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('serve', Array)
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(442): CodeIgniter\CLI\Console->run()
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\spark(78): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#12 {main}
+[Method: CLI, Route: serve]
+in SYSTEMPATH\CLI\InputOutput.php on line 78.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2026-04-02 11:39:28 --> ErrorException: fwrite(): Write of 65 bytes failed with errno=22 Invalid argument
+[Method: CLI, Route: serve]
+in SYSTEMPATH\CLI\InputOutput.php on line 78.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write of 65 bytes failed with errno=22 Invalid argument', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\CLI\\InputOutput.php', 78)
+ 2 SYSTEMPATH\CLI\InputOutput.php(78): fwrite(resource (stream), 'CodeIgniter development server started on http://127.0.0.1:8083
+')
+ 3 SYSTEMPATH\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(resource (stream), 'CodeIgniter development server started on http://127.0.0.1:8083
+')
+ 4 SYSTEMPATH\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(resource (stream), 'CodeIgniter development server started on http://127.0.0.1:8083
+')
+ 5 SYSTEMPATH\Commands\Server\Serve.php(99): CodeIgniter\CLI\CLI::write('CodeIgniter development server started on http://127.0.0.1:8083', 'green')
+ 6 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 7 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 8 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 9 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Server\Serve->run([...])
+10 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('serve', [...])
+11 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+12 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+13 ROOTPATH\spark(78): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:39:28 --> ErrorException: fwrite(): Write of 65 bytes failed with errno=22 Invalid argument
+[Method: CLI, Route: serve]
+in SYSTEMPATH\CLI\InputOutput.php on line 78.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write of 65 bytes failed with errno=22 Invalid argument', 'C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\vendor\\codeigniter4\\framework\\system\\CLI\\InputOutput.php', 78)
+ 2 SYSTEMPATH\CLI\InputOutput.php(78): fwrite(resource (stream), 'CodeIgniter development server started on http://localhost:8083
+')
+ 3 SYSTEMPATH\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(resource (stream), 'CodeIgniter development server started on http://localhost:8083
+')
+ 4 SYSTEMPATH\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(resource (stream), 'CodeIgniter development server started on http://localhost:8083
+')
+ 5 SYSTEMPATH\Commands\Server\Serve.php(99): CodeIgniter\CLI\CLI::write('CodeIgniter development server started on http://localhost:8083', 'green')
+ 6 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 7 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 8 SYSTEMPATH\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run([...])
+ 9 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Server\Serve->run([...])
+10 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('serve', [...])
+11 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+12 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+13 ROOTPATH\spark(78): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-04-02 11:39:28 --> ErrorException: Uncaught ErrorException: fwrite(): Write of 2 bytes failed with errno=22 Invalid argument in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php:78
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write...', 'C:\\Users\\Rizlra...', 78)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php(78): fwrite(Resource id #2, '\r\n')
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(Resource id #2, '\r\n')
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(Resource id #2, '\r\n')
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(549): CodeIgniter\CLI\CLI::write()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\app\Views\errors\cli\error_exception.php(6): CodeIgniter\CLI\CLI::newLine()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\Exceptions.php(349): include('C:\\Users\\Rizlra...')
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\Exceptions.php(352): CodeIgniter\Debug\Exceptions->CodeIgniter\Debug\{closure}()
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Debug\Exceptions.php(183): CodeIgniter\Debug\Exceptions->render(Object(ErrorException), 500)
+#9 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#10 {main}
+  thrown
+【Previous Exception】
+ErrorException
+fwrite(): Write of 65 bytes failed with errno=22 Invalid argument
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(8, 'fwrite(): Write...', 'C:\\Users\\Rizlra...', 78)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\InputOutput.php(78): fwrite(Resource id #2, 'CodeIgniter dev...')
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(1126): CodeIgniter\CLI\InputOutput->fwrite(Resource id #2, 'CodeIgniter dev...')
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\CLI.php(465): CodeIgniter\CLI\CLI::fwrite(Resource id #2, 'CodeIgniter dev...')
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(99): CodeIgniter\CLI\CLI::write('CodeIgniter dev...', 'green')
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run(Array)
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run(Array)
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Commands\Server\Serve.php(116): CodeIgniter\Commands\Server\Serve->run(Array)
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\Commands.php(74): CodeIgniter\Commands\Server\Serve->run(Array)
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('serve', Array)
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(442): CodeIgniter\CLI\Console->run()
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\spark(78): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+[Method: CLI, Route: serve]
+in SYSTEMPATH\CLI\InputOutput.php on line 78.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2026-04-02 21:08:15 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'dbgudang_tests', 3306, '', 0)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(91): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(67): ExampleDatabaseTest->loadDependencies()
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run(Array, true)
+#14 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+#15 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\bin\phpunit(122): include('C:\\Users\\Rizlra...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(91): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(67): ExampleDatabaseTest->loadDependencies()
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run(Array, true)
+#13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+#14 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\bin\phpunit(122): include('C:\\Users\\Rizlra...')
+#15 {main}
+ERROR - 2026-04-02 21:08:17 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'dbgudang_tests', 3306, '', 0)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(91): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(67): ExampleDatabaseTest->loadDependencies()
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run(Array, true)
+#14 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+#15 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\bin\phpunit(122): include('C:\\Users\\Rizlra...')
+#16 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(91): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\DatabaseTestTrait.php(67): ExampleDatabaseTest->loadDependencies()
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Test\CIUnitTestCase.php(254): ExampleDatabaseTest->setUpDatabase()
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(1216): CodeIgniter\Test\CIUnitTestCase->setUp()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestResult.php(729): PHPUnit\Framework\TestCase->runBare()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestCase.php(973): PHPUnit\Framework\TestResult->run(Object(ExampleDatabaseTest))
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestCase->run(Object(PHPUnit\Framework\TestResult))
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\Framework\TestSuite.php(685): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(651): PHPUnit\Framework\TestSuite->run(Object(PHPUnit\Framework\TestResult))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(146): PHPUnit\TextUI\TestRunner->run(Object(PHPUnit\Framework\TestSuite), Array, Array, true)
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\src\TextUI\Command.php(99): PHPUnit\TextUI\Command->run(Array, true)
+#13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
+#14 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\bin\phpunit(122): include('C:\\Users\\Rizlra...')
+#15 {main}
