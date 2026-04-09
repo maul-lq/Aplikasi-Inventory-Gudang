@@ -127,3 +127,56 @@ Stack trace:
 #13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\phpunit\phpunit\phpunit(107): PHPUnit\TextUI\Command::main()
 #14 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\bin\phpunit(122): include('C:\\Users\\Rizlra...')
 #15 {main}
+ERROR - 2026-04-09 21:47:01 --> Error connecting to the database: mysqli_sql_exception: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'dbgudang', 3306, '', 0)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\app\Controllers\Login.php(54): CodeIgniter\BaseModel->first()
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(951): App\Controllers\Login->cekuser()
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\rewrite.php(44): require_once('C:\\Users\\Rizlra...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No connection could be made because the target machine actively refused it in C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(555): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\app\Controllers\Login.php(54): CodeIgniter\BaseModel->first()
+#6 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(951): App\Controllers\Login->cekuser()
+#7 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\Users\Rizlrad Fz\Koding\Codeigneter 4\Aplikasi-Inventory-Gudang\vendor\codeigniter4\framework\system\rewrite.php(44): require_once('C:\\Users\\Rizlra...')
+#13 {main}
+CRITICAL - 2026-04-09 21:47:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No connection could be made because the target machine actively refused it
+[Method: POST, Route: login/cekUser]
+in SYSTEMPATH\Database\BaseConnection.php on line 606.
+ 1 SYSTEMPATH\Database\BaseConnection.php(795): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `users`
+WHERE `userid` = :userid:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(295): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Login.php(54): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Login->cekuser()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Rizlrad Fz\\Koding\\Codeigneter 4\\Aplikasi-Inventory-Gudang\\public\\index.php')

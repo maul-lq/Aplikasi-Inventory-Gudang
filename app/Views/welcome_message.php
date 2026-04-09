@@ -40,6 +40,7 @@
 			margin: 0;
 			overflow: hidden;
 			padding: 0;
+			padding: 0;
 			text-align: right;
 		}
 		header li {
