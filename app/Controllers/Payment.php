@@ -9,7 +9,7 @@ class Payment extends BaseController
     public function index()
     {
         // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-K5H0XsWr8DnRAjxqvlbqrtE-';
+        \Midtrans\Config::$serverKey = 'Mid-server-t8YFr7d1P255eCSeW6DsHWRd';
         // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
         \Midtrans\Config::$isProduction = false;
         // Set sanitization on (default)
