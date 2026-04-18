@@ -202,6 +202,13 @@ Jalankan:
 Kalau nanti fitur upload file gagal, cek juga apakah ada folder upload lain di luar writable
 yang perlu diubah ownership-nya ke www-data.
 
+Catatan penting:
+- Di Ubuntu + Apache, proses web biasanya berjalan sebagai `www-data`
+- Kalau folder/file di dalam `writable/` dimiliki user deploy biasa (misalnya `ser`)
+  maka request web bisa gagal walaupun command CLI masih jalan normal
+- Setelah `git clone`, `git pull`, restore backup, atau copy file manual ke server,
+  aman untuk mengulangi lagi perintah `chown/chmod` di atas agar ownership tidak meleset
+
 Bagian 11 - Konfigurasi Apache (REKOMENDASI)
 --------------------------------------------
 Poin paling penting untuk CodeIgniter 4:
@@ -304,6 +311,9 @@ Kalau nanti ada perubahan code dan kamu mau deploy ulang:
   cd /var/www/aplikasi-inventory-gudang
   git pull
   composer install --no-dev -o
+  sudo chown -R www-data:www-data writable
+  sudo find writable -type d -exec chmod 775 {} \;
+  sudo find writable -type f -exec chmod 664 {} \;
   php spark optimize:clear
   php spark optimize
   sudo systemctl reload apache2
@@ -330,6 +340,7 @@ Bagian 16 - Troubleshooting paling umum
 3. Permission denied pada logs/cache/session/upload
    - cek folder writable dimiliki oleh www-data
    - ulangi langkah permission di Bagian 10
+   - gejala umumnya: CLI (`php spark`) bisa jalan, tapi akses web via Apache/Nginx gagal
 
 4. URL redirect salah / balik ke localhost
    - cek app.baseURL di .env
