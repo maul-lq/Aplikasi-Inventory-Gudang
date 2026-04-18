@@ -135,17 +135,17 @@ Repo ini sudah punya file .env. Edit file itu dan sesuaikan untuk server:
 
 Nilai yang minimal perlu diubah:
 
-  CI_ENVIRONMENT = production
+CI_ENVIRONMENT = production
 
-  app.baseURL = 'http://IP-ATAU-DOMAIN-KAMU/' \ 192.168.43.247
+app.baseURL = 'http://IP-ATAU-DOMAIN-KAMU/' \ 192.168.43.247
 
-  database.default.hostname = 127.0.0.1
-  database.default.database = dbgudang
-  database.default.username = dbgudang_user
-  database.default.password = PASSWORD_KUAT
-  database.default.DBDriver = MySQLi
-  database.default.DBPrefix =
-  database.default.port = 3306
+database.default.hostname = 127.0.0.1
+database.default.database = dbgudang
+database.default.username = dbgudang_user
+database.default.password = PASSWORD_KUAT
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
 
 Catatan penting:
 - Kalau pakai NAT + port forwarding dan akses dari host lewat http://127.0.0.1:8080,
