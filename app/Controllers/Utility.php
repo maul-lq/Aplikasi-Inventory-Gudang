@@ -29,7 +29,7 @@ class Utility extends BaseController
             $port = isset($conf['port']) ? $conf['port'] : 3306;
 
             // Cek/siapkan direktori tujuan backup minimal
-            $targetDir = 'database/backup/';
+            $targetDir = WRITEPATH . 'backup' . DIRECTORY_SEPARATOR;
             if (!is_dir($targetDir)) {
                 if (!mkdir($targetDir, 0755, true)) {
                     throw new \Exception('Direktori tujuan backup tidak ada dan tidak bisa dibuat: ' . $targetDir);
