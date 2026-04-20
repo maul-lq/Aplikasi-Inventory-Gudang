@@ -37,38 +37,53 @@
     </div>
   </div>
 </div>
-<script src="<?= base_url('dist/js/autoNumeric.js') ?>"></script>
 <script>
+function formatAngka(angka) {
+    let nilai = String(angka || '').replace(/[^0-9-]/g, '');
+
+    if (nilai.length === 0 || nilai === '-') {
+        return '';
+    }
+
+    let negatif = nilai.charAt(0) === '-';
+    if (negatif) {
+        nilai = nilai.substring(1);
+    }
+
+    let sisa = nilai.length % 3;
+    let hasil = nilai.substr(0, sisa);
+    let ribuan = nilai.substr(sisa).match(/\d{3}/g);
+
+    if (ribuan) {
+        hasil += (sisa ? '.' : '') + ribuan.join('.');
+    }
+
+    return negatif ? '-' + hasil : hasil;
+}
+
+function ambilAngka(angka) {
+    let nilai = String(angka || '').replace(/[^0-9-]/g, '');
+    if (nilai.length === 0 || nilai === '-') {
+        return 0;
+    }
+
+    return parseInt(nilai, 10);
+}
+
 $(document).ready(function () {
-    $('#totalbayar').autoNumeric('init', {
-        mDec : 0,
-        aDec: ',',
-        aSep : '.'
-    });
-    $('#jumlahuang').autoNumeric('init', {
-        mDec : 0,
-        aDec: ',',
-        aSep : '.'
-    });
-    $('#sisauang').autoNumeric('init', {
-        mDec : 0,
-        aDec: ',',
-        aSep : '.'
-    });
-    
-    $('#jumlahuang').keyup(function (e) { 
-       let totalbayar = $('#totalbayar').autoNumeric('get');
-       let jumlahuang = $('#jumlahuang').autoNumeric('get');
+    $('#totalbayar').val(formatAngka($('#totalbayar').val()));
+    $('#jumlahuang').on('input', function () {
+       let totalbayar = ambilAngka($('#totalbayar').val());
+       let jumlahuang = ambilAngka($(this).val());
 
-       let sisauang;
+       $(this).val(formatAngka(jumlahuang));
 
-       if (parseInt(jumlahuang) < parseInt(totalbayar)){
-           sisauang = 0;
-       }else{
-           sisauang = parseInt(jumlahuang) - parseInt(totalbayar);
+       let sisauang = 0;
+       if (jumlahuang >= totalbayar) {
+           sisauang = jumlahuang - totalbayar;
        }
 
-       $('#sisauang').autoNumeric('set', sisauang);
+       $('#sisauang').val(formatAngka(sisauang));
     });
 
     $('.frmpembayaran').submit(function (e) { 

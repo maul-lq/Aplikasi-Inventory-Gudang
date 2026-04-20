@@ -277,6 +277,25 @@ class Barangkeluar extends BaseController
         $tglfaktur =  $this->request->getPost('tglfaktur');
         $idpelanggan =  $this->request->getPost('idpelanggan');
         $totalharga =  $this->request->getPost('totalharga');
+        $totalHargaBersih = intval(preg_replace('/\D/', '', (string) $totalharga));
+
+        if (empty($idpelanggan)) {
+            $json = [
+                'error' => 'Pelanggan harus dipilih terlebih dahulu'
+            ];
+
+            echo json_encode($json);
+            return;
+        }
+
+        if (empty($totalharga) || $totalHargaBersih <= 0) {
+            $json = [
+                'error' => 'Total harga belum tersedia'
+            ];
+
+            echo json_encode($json);
+            return;
+        }
 
         $modelTemp =  new ModelTempBarangKeluar();
         $cekData = $modelTemp->tampilDataTemp($nofaktur);
@@ -307,9 +326,27 @@ class Barangkeluar extends BaseController
             $nofaktur = $this->request->getPost('nofaktur');
             $tglfaktur = $this->request->getPost('tglfaktur');
             $idpelanggan = $this->request->getPost('idpelanggan');
-            $totalbayar = str_replace(".", "", $this->request->getPost('totalbayar'));
-            $jumlahuang = str_replace(".", "", $this->request->getPost('jumlahuang'));
-            $sisauang = str_replace(".", "", $this->request->getPost('sisauang'));
+            $totalbayar = intval(preg_replace('/\D/', '', (string) $this->request->getPost('totalbayar')));
+            $jumlahuang = intval(preg_replace('/\D/', '', (string) $this->request->getPost('jumlahuang')));
+            $sisauang = intval(preg_replace('/\D/', '', (string) $this->request->getPost('sisauang')));
+
+            if (empty($idpelanggan)) {
+                $json = [
+                    'error' => 'Pelanggan harus dipilih terlebih dahulu'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+
+            if ($totalbayar <= 0) {
+                $json = [
+                    'error' => 'Total bayar belum tersedia'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
 
             $modelBarangKeluar =  new ModelBarangKeluar();
 
@@ -357,7 +394,25 @@ class Barangkeluar extends BaseController
             $nofaktur =  $this->request->getPost('nofaktur');
             $tglfaktur =  $this->request->getPost('tglfaktur');
             $idpelanggan =  $this->request->getPost('idpelanggan');
-            $totalharga =  $this->request->getPost('totalharga');
+            $totalharga = intval(preg_replace('/\D/', '', (string) $this->request->getPost('totalharga')));
+
+            if (empty($idpelanggan)) {
+                $json = [
+                    'error' => 'Pelanggan harus dipilih terlebih dahulu'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+
+            if ($totalharga <= 0) {
+                $json = [
+                    'error' => 'Total harga belum tersedia'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
 
             $modelTemp =  new ModelTempBarangKeluar();
             $cekData = $modelTemp->tampilDataTemp($nofaktur);
@@ -365,6 +420,16 @@ class Barangkeluar extends BaseController
             if ($cekData->getNumRows() > 0) {
                 $modelPelanggan = new ModelPelanggan();
                 $rowPel = $modelPelanggan->find($idpelanggan);
+
+                if ($rowPel == null) {
+                    $json = [
+                        'error' => 'Data pelanggan tidak ditemukan'
+                    ];
+
+                    echo json_encode($json);
+                    return;
+                }
+
                 $namaPelanggan = $rowPel['pelnama'];
                 $telpPelanggan = $rowPel['peltelp'];
 
@@ -410,8 +475,8 @@ class Barangkeluar extends BaseController
 
                 $params = [
                     'transaction_details' => array(
-                        'order_id' => rand(),
-                        'gross_amount' => 500000,
+                        'order_id' => $nofaktur,
+                        'gross_amount' => $totalharga,
                     ),
                     'item_details' => $dataTempBarangKeluar,
                     'customer_details' => $customer_details,
@@ -444,6 +509,24 @@ class Barangkeluar extends BaseController
             $order_id = $this->request->getPost('order_id');
             $payment_type = $this->request->getPost('payment_type');
             $transaction_status = $this->request->getPost('transaction_status');
+
+            if (empty($idpelanggan)) {
+                $json = [
+                    'error' => 'Pelanggan harus dipilih terlebih dahulu'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
+
+            if (empty($order_id)) {
+                $json = [
+                    'error' => 'Order ID pembayaran tidak ditemukan'
+                ];
+
+                echo json_encode($json);
+                return;
+            }
 
             $modelBarangKeluar = new ModelBarangKeluar();
             $modelBarangKeluar->insert([
@@ -509,7 +592,7 @@ class Barangkeluar extends BaseController
             // update status transaksi
             $status = \Midtrans\Transaction::status($cekData['order_id']);
             $modelBarangKeluar->update($faktur, [
-                'transaction_status' => $status->transaction_status
+                'transaction_status' => $status['transaction_status']
             ]);
 
             $data = [
@@ -518,7 +601,7 @@ class Barangkeluar extends BaseController
                 'namapelanggan' => $namaPelanggan,
                 'telp' => $telp,
                 'orderid' => $cekData['order_id'],
-                'status_transaksi' => $status->transaction_status
+                'status_transaksi' => $status['transaction_status']
             ];
 
             return view('barangkeluar/cektransaksimidtrans', $data);

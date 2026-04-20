@@ -71,6 +71,7 @@ class Filters extends BaseConfig
                     'login', 'login/*',
                     'main', 'main/*',
                     'barangkeluar', 'barangkeluar/*',
+                    'pelanggan', 'pelanggan/*',
                 ]
             ],
             'filtergudang' => [
