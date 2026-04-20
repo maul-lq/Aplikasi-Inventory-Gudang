@@ -72,6 +72,7 @@ class Filters extends BaseConfig
                     'main', 'main/*',
                     'barangkeluar', 'barangkeluar/*',
                     'pelanggan', 'pelanggan/*',
+                    'utility/gantipassword', 'utility/updatepassword',
                 ]
             ],
             'filtergudang' => [
@@ -79,6 +80,7 @@ class Filters extends BaseConfig
                     'login', 'login/*',
                     'main', 'main/*',
                     'barangmasuk', 'barangmasuk/*',
+                    'utility/gantipassword', 'utility/updatepassword',
                 ]
             ],
             'toolbar',
