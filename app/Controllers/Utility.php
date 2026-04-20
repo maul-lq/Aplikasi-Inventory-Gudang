@@ -82,9 +82,15 @@ class Utility extends BaseController
             } else {
                 $modelUser = new Modeluser();
                 $rowData = $modelUser->find($iduser);
-                $passUser = $rowData['userpassword'];
 
-                if (password_verify($passlama, $passUser)) {
+                $passUser = '';
+                if (is_array($rowData) && array_key_exists('userpassword', $rowData)) {
+                    $passUser = (string) $rowData['userpassword'];
+                } elseif (is_object($rowData) && property_exists($rowData, 'userpassword')) {
+                    $passUser = (string) $rowData->userpassword;
+                }
+
+                if (password_verify((string) $passlama, $passUser)) {
                     $hash = password_hash($passbaru, PASSWORD_DEFAULT);
                     $modelUser->update($iduser, [
                         'userpassword' => $hash
