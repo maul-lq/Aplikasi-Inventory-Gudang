@@ -10,6 +10,8 @@ phpunit.xml
 material/
 
 # Runtime artifacts
+/writable/backup/*
+!/writable/backup/index.html
 /writable/cache/*
 !/writable/cache/index.html
 /writable/debugbar/*
