@@ -17,9 +17,35 @@ class Utility extends BaseController
     {
         try {
             $tglSekarang = date('d-m-Y');
+            // Ambil konfigurasi database aktif dari runtime aplikasi
+            $dbConfig = new \Config\Database();
+            $group = $dbConfig->defaultGroup;
+            $conf = $dbConfig->{$group};
 
-            $dump = new Mysqldump('mysql:host=localhost;dbname=dbgudang;port=3306', 'root', '');
-            $dump->start('database/backup/dbgudang-' . $tglSekarang . '.sql');
+            $host = isset($conf['hostname']) ? $conf['hostname'] : 'localhost';
+            $database = isset($conf['database']) ? $conf['database'] : '';
+            $username = isset($conf['username']) ? $conf['username'] : '';
+            $password = isset($conf['password']) ? $conf['password'] : '';
+            $port = isset($conf['port']) ? $conf['port'] : 3306;
+
+            // Cek/siapkan direktori tujuan backup minimal
+            $targetDir = 'database/backup/';
+            if (!is_dir($targetDir)) {
+                if (!mkdir($targetDir, 0755, true)) {
+                    throw new \Exception('Direktori tujuan backup tidak ada dan tidak bisa dibuat: ' . $targetDir);
+                }
+            }
+
+            if (!is_writable($targetDir)) {
+                throw new \Exception('Direktori tujuan backup tidak writable: ' . $targetDir);
+            }
+
+            $targetFile = $targetDir . 'dbgudang-' . $tglSekarang . '.sql';
+
+            $dsn = 'mysql:host=' . $host . ';dbname=' . $database . ';port=' . $port;
+
+            $dump = new Mysqldump($dsn, $username, $password);
+            $dump->start($targetFile);
 
             $pesan = 'Backup Database Berhasil';
             session()->setFlashdata('pesan', $pesan);
