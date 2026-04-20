@@ -67,7 +67,34 @@
             <img src="<?= base_url() ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Administrator</a>
+            <?php
+              $role = session()->get('levelnama');
+              if (empty($role)) {
+                $levelId = session()->get('userlevelid');
+                switch ($levelId) {
+                  case 1:
+                  case '1':
+                    $role = 'Administrator';
+                    break;
+                  case 2:
+                  case '2':
+                    $role = 'Kasir';
+                    break;
+                  case 3:
+                  case '3':
+                    $role = 'Gudang';
+                    break;
+                  case 4:
+                  case '4':
+                    $role = 'Pimpinan';
+                    break;
+                  default:
+                    $role = session()->get('usernama') ?? 'Guest';
+                    break;
+                }
+              }
+            ?>
+            <a href="#" class="d-block"><?= esc($role) ?></a>
           </div>
         </div>
 

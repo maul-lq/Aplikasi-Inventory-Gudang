@@ -69,12 +69,17 @@ class Login extends BaseController
                     } else {
                         $passwordUser = $cekUserLogin['userpassword'];
                         if (password_verify($password, $passwordUser)) {
-                            // simpan session
+                            // simpan session (tambahkan levelnama dari tabel levels)
+                            $db = \Config\Database::connect();
+                            $levelRow = $db->table('levels')->where('levelid', $cekUserLogin['userlevelid'])->get()->getRowArray();
+                            $levelNama = $levelRow ? $levelRow['levelnama'] : null;
+
                             $simpan_session = [
                                 'login' => true,
                                 'userid' => $username,
                                 'usernama' => $cekUserLogin['usernama'],
                                 'userlevelid' => $cekUserLogin['userlevelid'],
+                                'levelnama' => $levelNama,
                             ];
 
                             session()->set($simpan_session);
