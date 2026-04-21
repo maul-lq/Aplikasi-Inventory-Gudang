@@ -10,7 +10,28 @@ class Utility extends BaseController
 {
     public function index()
     {
-        return view('utility/index');
+        $targetDir = WRITEPATH . 'backup' . DIRECTORY_SEPARATOR;
+        $backups = [];
+
+        if (is_dir($targetDir)) {
+            $files = glob($targetDir . '*.sql');
+            if ($files !== false) {
+                usort($files, function ($a, $b) {
+                    return filemtime($b) <=> filemtime($a);
+                });
+
+                foreach ($files as $f) {
+                    $backups[] = [
+                        'name'  => basename($f),
+                        'path'  => $f,
+                        'mtime' => filemtime($f),
+                        'time'  => date('Y-m-d H:i:s', filemtime($f)),
+                    ];
+                }
+            }
+        }
+
+        return view('utility/index', ['backups' => $backups]);
     }
 
     public function doBackup()
@@ -55,6 +76,130 @@ class Utility extends BaseController
             session()->setFlashdata('pesan', $pesan);
             return redirect()->to('/utility/index');
         }
+    }
+
+    public function download($filename = null)
+    {
+        if ($filename === null) {
+            session()->setFlashdata('pesan', 'Nama file tidak diberikan');
+            return redirect()->to('/utility/index');
+        }
+
+        $basename = basename($filename);
+        if ($basename !== $filename) {
+            session()->setFlashdata('pesan', 'Nama file tidak valid');
+            return redirect()->to('/utility/index');
+        }
+
+        $targetDir = realpath(WRITEPATH . 'backup');
+        if ($targetDir === false) {
+            session()->setFlashdata('pesan', 'Folder backup tidak tersedia');
+            return redirect()->to('/utility/index');
+        }
+
+        // normalize prefix so prefix-check is reliable on Windows and Unix
+        $targetDir = rtrim($targetDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+        $fullPath = $targetDir . $basename;
+        $realFull = realpath($fullPath);
+
+        if ($realFull === false || strpos($realFull, $targetDir) !== 0) {
+            session()->setFlashdata('pesan', 'File tidak valid atau berada di luar folder backup');
+            return redirect()->to('/utility/index');
+        }
+
+        $ext = strtolower(pathinfo($realFull, PATHINFO_EXTENSION));
+        if ($ext !== 'sql') {
+            session()->setFlashdata('pesan', 'File bukan file backup .sql');
+            return redirect()->to('/utility/index');
+        }
+
+        return $this->response->download($realFull, null);
+    }
+
+    public function delete()
+    {
+        // Guard: accept POST regardless of case and provide explicit feedback for non-POST
+        if (strtolower($this->request->getMethod() ?? '') !== 'post') {
+            session()->setFlashdata('pesan', 'Metode request tidak diizinkan (harus POST)');
+            return redirect()->to('/utility/index');
+        }
+
+        // Diagnostic exception removed; keep runtime logging for tracing.
+
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete entered; method=' . $this->request->getMethod());
+        }
+
+        $filename = $this->request->getPost('filename');
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete POST filename=' . ($filename ?? 'NULL'));
+        }
+
+        $basename = basename($filename);
+        if ($basename !== $filename) {
+            session()->setFlashdata('pesan', 'Nama file tidak valid');
+            return redirect()->to('/utility/index');
+        }
+
+        $targetDir = realpath(WRITEPATH . 'backup');
+        if ($targetDir === false) {
+            session()->setFlashdata('pesan', 'Folder backup tidak tersedia');
+            return redirect()->to('/utility/index');
+        }
+
+        // normalize prefix so prefix-check is reliable on Windows and Unix
+        $targetDir = rtrim($targetDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+        $fullPath = $targetDir . $basename;
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete fullPath=' . $fullPath);
+        }
+        $realFull = realpath($fullPath);
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete realFull=' . ($realFull === false ? 'false' : $realFull));
+        }
+
+        if ($realFull === false || strpos($realFull, $targetDir) !== 0) {
+            session()->setFlashdata('pesan', 'File tidak valid atau berada di luar folder backup');
+            return redirect()->to('/utility/index');
+        }
+
+        $ext = strtolower(pathinfo($realFull, PATHINFO_EXTENSION));
+        if ($ext !== 'sql') {
+            session()->setFlashdata('pesan', 'File bukan file backup .sql');
+            return redirect()->to('/utility/index');
+        }
+
+        // Check writable and attempt unlink with clearer feedback and logging
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete is_writable=' . (is_writable($realFull) ? 'yes' : 'no'));
+        }
+
+        if (!is_writable($realFull)) {
+            session()->setFlashdata('pesan', 'Gagal menghapus: file atau folder tidak writable');
+            return redirect()->to('/utility/index');
+        }
+
+        if (function_exists('log_message')) {
+            log_message('debug', 'Utility::delete attempting unlink: ' . $realFull);
+        }
+
+        $deleted = unlink($realFull);
+        if ($deleted) {
+            if (function_exists('log_message')) {
+                log_message('info', 'Utility::delete succeeded unlink ' . $realFull);
+            }
+            session()->setFlashdata('pesan', 'File backup dihapus');
+        } else {
+            $err = error_get_last();
+            if (function_exists('log_message')) {
+                log_message('error', 'Utility::delete failed to unlink ' . $realFull . ' - ' . ($err['message'] ?? 'unknown'));
+            }
+            session()->setFlashdata('pesan', 'Gagal menghapus file backup');
+        }
+
+        return redirect()->to('/utility/index');
     }
 
     public function gantipassword()
